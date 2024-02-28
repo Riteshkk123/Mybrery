@@ -4,15 +4,20 @@ if(process.env.NODE_ENV !== 'production'){
 
 
 
-//inport express files
+//import express files
 
 const express = require('express')
 const app = express()
 //importing layouts
 const expressLayouts = require('express-ejs-layouts')
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({limit:'10mb',extended:false}))
+
 //here we are let the server.js to know that we have Index.js file in router folder
 const indexRouter = require('./routes(controller)/index')
+const authorRouter = require('./routes(controller)/authors')
 
 
 //setting view engine 
@@ -27,6 +32,8 @@ app.use(expressLayouts)
 app.use(express.static('public'))
 //app.use('/', indexRouter) mounts the indexRouter to the root route ('/'). This means that any requests coming to the root route will be handled by the indexRouter, which is defined in a separate file (./routes/index.js in this case).
 app.use('/', indexRouter)
+app.use('/authors', authorRouter)
+
 //adding database
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DATABASE_URL);
