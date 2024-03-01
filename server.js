@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({limit:'10mb',extended:false}))
 //here we are let the server.js to know that we have Index.js file in router folder
 const indexRouter = require('./routes(controller)/index')
 const authorRouter = require('./routes(controller)/authors')
+const bookRouter = require('./routes(controller)/books')
+
 
 
 //setting view engine 
@@ -33,6 +35,8 @@ app.use(express.static('public'))
 //app.use('/', indexRouter) mounts the indexRouter to the root route ('/'). This means that any requests coming to the root route will be handled by the indexRouter, which is defined in a separate file (./routes/index.js in this case).
 app.use('/', indexRouter)
 app.use('/authors', authorRouter)
+app.use('/books', bookRouter)
+
 
 //adding database
 const mongoose = require('mongoose')
