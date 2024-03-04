@@ -74,7 +74,7 @@ function saveCover(book, coverEncoded) {
       book.coverImageType = cover.type
     }
   
-    console.error('Error parsing cover data:', error)
+    // console.error('Error parsing cover data:', error)
     // Handle the error as needed, e.g., logging, sending an error response, etc.
   
 }

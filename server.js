@@ -10,15 +10,19 @@ const express = require('express')
 const app = express()
 //importing layouts
 const expressLayouts = require('express-ejs-layouts')
+const methodOverride = require('method-override')
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({limit:'10mb',extended:false}))
+app.use(methodOverride('_method'))
 
 //here we are let the server.js to know that we have Index.js file in router folder
 const indexRouter = require('./routes(controller)/index')
 const authorRouter = require('./routes(controller)/authors')
 const bookRouter = require('./routes(controller)/books')
+
+
 
 
 
