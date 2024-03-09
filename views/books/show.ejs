@@ -1,9 +1,30 @@
-<h2><%= book.title %></h2>
-<img width="100" height="150" src="<%= book.coverImagePath %>" alt="image is here ">
-<div>Author: <%= book.author ? book.author.name : 'Deleted ' %></div>
-<div>Publish Date: <%=book.publishDate.toDateString() %></div>
-<div>Page Count:<%=book.pageCount %></div>
-<div>Description:<%=book.description %></div>
-<a class="btn btn-primary" href="/books/<%=book.id %>/edit">Edit</a>
-<%-include('../partials/deleteForm',{url:`/books/${book.id}`}) %>
-<a class="btn btn-primary" href="/authors/<%=book.author ?book.author.id:'Deleted' %>">View Author</a>
+<h2>
+    <%= book.title %>
+</h2>
+
+<div class="book-details">
+
+    <div> <img width="100" height="150" src="<%= book.coverImagePath %>" alt="image is here ">
+        <div class="btn-detail-btn-grid">
+            <a class="btn btn-primary" href="/books/<%=book.id %>/edit">Edit</a>
+            <%-include('../partials/deleteForm',{url:`/books/${book.id}`}) %>
+                <a class="btn btn-primary book-detail-author-button"
+                    href="/authors/<%=book.author ?book.author.id:'Deleted' %>">View Author</a>
+        </div>
+    </div>
+    <div class="book-details-grid">
+        <div class="book-details-label">Author: 
+        </div>
+        <div><%= book.author ? book.author.name : 'Deleted ' %></div>
+
+        <div class="book-details-label">Publish Date:
+        </div>
+        <div> <%=book.publishDate.toDateString() %></div>
+        <div class="book-details-label" >Page Count
+        </div>
+        <div>:<%=book.pageCount %></div>
+        <div class="book-details-label" >Description:
+        </div>
+        <div><%=book.description %></div>
+    </div>
+</div>

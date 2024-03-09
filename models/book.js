@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema({
     required: true
   },
   description: {
-    type: String,
+    type: String
   },
   publishDate: {
     type: Date,
@@ -19,28 +19,27 @@ const bookSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     required: true,
-    default:Date.now
+    default: Date.now
   },
-  coverImage:{
-    type:Buffer,
-    required:true
+  coverImage: {
+    type: Buffer,
+    required: true
   },
-  coverImageType:{
-    type:String,
-    required:true
-
+  coverImageType: {
+    type: String,
+    required: true
   },
-  
-author:{
-  type:mongoose.Schema.Types.ObjectId,
-  required:true,
-  ref:'Author'
-}
-})
-bookSchema.virtual('coverImagePath').get(function(){
-  if(this.coverImage != null && this.coverImageType != null){
-    return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage}`  
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Author'
   }
 })
+
+bookSchema.virtual('coverImagePath').get(function() {
+  if (this.coverImage != null && this.coverImageType != null) {
+    return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
+  }
+})
+
 module.exports = mongoose.model('Book', bookSchema)
-//here the "Author" is the table name where the data will stored
